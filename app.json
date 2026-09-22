@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "github__IndieDev2003__meta-for-me",
-    "slug": "github__IndieDev2003__meta-for-me",
+    "name": "meta-for-me",
+    "slug": "meta-for-me",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
