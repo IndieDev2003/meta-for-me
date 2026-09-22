@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS active_trips (
   occupancy_status TEXT NOT NULL CHECK (
     occupancy_status IN ('SEATS_AVAILABLE', 'STANDING_ONLY', 'FULL_SKIPPING_STOPS')
   ),
-  speed KMPH, -- Speed in km/h
-  bearing DEGREE, -- Direction in degrees
+  speed FLOAT, -- Speed in km/h
+  bearing FLOAT, -- Direction in degrees
   passenger_count INT DEFAULT 1,
   started_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW(),
@@ -153,7 +153,7 @@ $$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION estimate_time_to_stop(
   bus_location GEOGRAPHY(POINT, 4326),
   stop_location GEOGRAPHY(POINT, 4326),
-  bus_speed KMPH DEFAULT 30
+  bus_speed FLOAT DEFAULT 30
 )
 RETURNS FLOAT AS $$
 DECLARE
