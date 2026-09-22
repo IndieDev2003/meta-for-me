@@ -1,0 +1,65 @@
+import 'dotenv/config';
+
+export default {
+  expo: {
+    name: 'meta-for-me',
+    slug: 'meta-for-me',
+    version: '1.0.0',
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    userInterfaceStyle: 'light',
+    splash: {
+      image: './assets/splash.png',
+      resizeMode: 'contain',
+      backgroundColor: '#ffffff',
+    },
+    ios: {
+      supportsTablet: true,
+      infoPlist: {
+        UIBackgroundModes: ['location'],
+        NSLocationWhenInUseUsageDescription: 'This app needs access to your location to track bus movements and provide real-time updates.',
+        NSLocationAlwaysAndWhenInUseUsageDescription: 'This app needs access to your location to track bus movements and provide real-time updates, even when the app is in the background.',
+        NSLocationAlwaysUsageDescription: 'This app needs access to your location to track bus movements and provide real-time updates, even when the app is in the background.',
+      },
+    },
+    android: {
+      adaptiveIcon: {
+        backgroundColor: '#E6F4FE',
+        foregroundImage: './assets/android-icon-foreground.png',
+        backgroundImage: './assets/android-icon-background.png',
+        monochromeImage: './assets/android-icon-monochrome.png',
+      },
+      predictiveBackGestureEnabled: false,
+      permissions: [
+        'ACCESS_FINE_LOCATION',
+        'ACCESS_BACKGROUND_LOCATION',
+        'ACCESS_COARSE_LOCATION',
+        'FOREGROUND_SERVICE',
+        'POST_NOTIFICATIONS',
+      ],
+    },
+    web: {
+      favicon: './assets/favicon.png',
+    },
+    plugins: ['expo-location', 'expo-notifications', 'expo-task-manager'],
+    extra: {
+      eas: {
+        projectId: process.env.EAS_PROJECT_ID,
+      },
+    },
+    runtimeVersion: {
+      policy: 'sdkVersion',
+    },
+    updates: {
+      fallbackToCacheTimeout: 0,
+    },
+    assetBundlePatterns: ['**/*'],
+    ios: {
+      supportsTablet: true,
+      bundleIdentifier: 'com.indiedev2003.metaforme',
+    },
+    android: {
+      package: 'com.indiedev2003.metaforme',
+    },
+  },
+};

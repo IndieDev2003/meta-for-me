@@ -1,0 +1,46 @@
+name: EAS Submit
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to submit (android/ios/all)'
+        required: true
+        default: 'android'
+      profile:
+        description: 'Build profile (development/preview/production)'
+        required: true
+        default: 'production'
+
+jobs:
+  submit:
+    name: EAS Submit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Login to Expo
+        run: echo "${{ secrets.EXPO_TOKEN }}" | eas login --token
+
+      - name: Submit Android to Google Play
+        if: ${{ inputs.platform == 'android' || inputs.platform == 'all' }}
+        run: eas submit --profile ${{ inputs.profile }} --platform android --non-interactive
+        env:
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+
+      - name: Submit iOS to App Store
+        if: ${{ inputs.platform == 'ios' || inputs.platform == 'all' }}
+        run: eas submit --profile ${{ inputs.profile }} --platform ios --non-interactive
+        env:
+          EAS_PROJECT_ID: ${{ secrets.EAS_PROJECT_ID }}
+          APPLE_APPLICATION_IDENTIFIER: ${{ secrets.APPLE_APPLICATION_IDENTIFIER }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}

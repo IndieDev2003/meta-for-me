@@ -2,6 +2,19 @@
   "name": "meta-for-me",
   "version": "1.0.0",
   "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eas:build": "eas build",
+    "eas:build:dev": "eas build --profile development",
+    "eas:build:preview": "eas build --profile preview",
+    "eas:build:prod": "eas build --profile production",
+    "eas:submit": "eas submit",
+    "eas:submit:prod": "eas submit --profile production",
+    "eas:config": "eas config"
+  },
   "dependencies": {
     "expo": "~57.0.24",
     "expo-status-bar": "~57.0.1",
@@ -21,13 +34,8 @@
   "devDependencies": {
     "@types/react": "~19.2.2",
     "typescript": "~6.0.3",
-    "@types/react-native-maps": "^0.0.5"
-  },
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
+    "@types/react-native-maps": "^0.0.5",
+    "dotenv": "^16.4.5"
   },
   "private": true
 }
